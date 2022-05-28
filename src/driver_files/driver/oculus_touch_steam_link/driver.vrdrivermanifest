@@ -1,0 +1,6 @@
+{
+	"alwaysActivate": true,
+	"name" : "oculus_touch_steam_link",
+	"directory" : "",
+	"resourceOnly" : false
+}
