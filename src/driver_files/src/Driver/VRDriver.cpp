@@ -24,7 +24,6 @@ void OculusTouchSteamLink::VRDriver::Cleanup()
     Log("Shutting down OculusTouchSteamLink...");
 }
 
-bool l = false;
 void OculusTouchSteamLink::VRDriver::RunFrame()
 {
     // Collect events
