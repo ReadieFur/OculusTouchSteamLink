@@ -14,7 +14,7 @@ std::string OculusTouchSteamLink::ControllerDevice::GetSerial()
 
 void OculusTouchSteamLink::ControllerDevice::Update()
 {
-    if (this->device_index_ == vr::k_unTrackedDeviceIndexInvalid || !enabled)
+    if (this->device_index_ == vr::k_unTrackedDeviceIndexInvalid)
         return;
 
     // Check if this device was asked to be identified
@@ -96,7 +96,7 @@ DeviceType OculusTouchSteamLink::ControllerDevice::GetDeviceType()
     return DeviceType::CONTROLLER;
 }
 
-OculusTouchSteamLink::Handedness OculusTouchSteamLink::ControllerDevice::GetHandedness()
+OculusTouchSteamLink::ControllerDevice::Handedness OculusTouchSteamLink::ControllerDevice::GetHandedness()
 {
     return this->handedness_;
 }
@@ -153,26 +153,7 @@ vr::EVRInitError OculusTouchSteamLink::ControllerDevice::Activate(uint32_t unObj
     // Set up a model "number" (not needed but good to have)
     GetDriver()->GetProperties()->SetStringProperty(props, vr::Prop_ModelNumber_String, "oculus_touch");
 
-    const ovrHmdType oculusHMDType = ovr_GetHmdDesc(GetDriver()->oculusVRSession).Type;
-    std::string oculusHMDString;
-    switch (oculusHMDType)
-    {
-    case ovrHmdType::ovrHmd_CV1:
-        oculusHMDString = "cv1";
-        break;
-    case ovrHmdType::ovrHmd_Quest:
-        oculusHMDString = "quest";
-        break;
-    case ovrHmdType::ovrHmd_Quest2:
-        oculusHMDString = "quest2";
-        break;
-    case ovrHmdType::ovrHmd_RiftS:
-        oculusHMDString = "rifts";
-        break;
-    default:
-        oculusHMDString = "cv1"; //Default to CV1 resources.
-        break;
-    }
+    std::string oculusHMDString = "cv1";
 
     // Give SteamVR a hint at what hand this controller is for
     if (this->handedness_ == Handedness::LEFT)

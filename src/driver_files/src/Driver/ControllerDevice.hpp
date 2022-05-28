@@ -11,6 +11,11 @@
 namespace OculusTouchSteamLink {
     class ControllerDevice : public IVRDevice {
         public:
+            enum class Handedness {
+                LEFT,
+                RIGHT,
+                ANY
+            };
 
             ControllerDevice(std::string serial, Handedness handedness = Handedness::ANY);
             ~ControllerDevice() = default;
